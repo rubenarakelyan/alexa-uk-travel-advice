@@ -5,4 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'alexa_skills_ruby', '~> 1.1'
+gem 'faraday', '~> 0.12'
 gem 'sinatra', '~> 2.0'
+
+group :production do
+  gem 'unicorn', '~> 5.3'
+end
+
+group :development do
+  gem 'govuk-lint', '~> 3.2'
+end
