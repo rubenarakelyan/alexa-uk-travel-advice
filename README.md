@@ -2,7 +2,7 @@
 
 This is a small Ruby and [Sinatra](http://www.sinatrarb.com) app that provides an Alexa skill to read out [foreign travel advice](https://www.gov.uk/foreign-travel-advice) published by the UK Government on GOV.UK.
 
-It uses the `[alexa_skills_ruby](https://github.com/DanElbert/alexa_skills_ruby)` gem to receive and decode requests from Alexa, and then gets the travel advice summary for the chosen country from the GOV.UK [content store](https://github.com/alphagov/content-store) API, cleans it up, turns it into [SSML](https://en.wikipedia.org/wiki/Speech_Synthesis_Markup_Language) and sends it back.
+It uses the [`alexa_skills_ruby`](https://github.com/DanElbert/alexa_skills_ruby) gem to receive and decode requests from Alexa, and then gets the travel advice summary for the chosen country from the GOV.UK [content store](https://github.com/alphagov/content-store) API, cleans it up, turns it into [SSML](https://en.wikipedia.org/wiki/Speech_Synthesis_Markup_Language) and sends it back.
 
 It's a pretty rough-and-ready app without much error checking or any tests for now.
 
