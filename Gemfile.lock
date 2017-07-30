@@ -74,6 +74,7 @@ DEPENDENCIES
   faraday (~> 0.12)
   govuk-lint (~> 3.2)
   nokogiri (~> 1.8)
+  rake (~> 12.0)
   sinatra (~> 2.0)
   unicorn (~> 5.3)
 
