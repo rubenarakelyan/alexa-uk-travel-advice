@@ -36,6 +36,10 @@ class AlexaUKTravelAdvice < Sinatra::Base
     redirect 'https://github.com/rubenarakelyan/alexa-uk-travel-advice'
   end
 
+  get '/healthcheck' do
+    'OK'
+  end
+
   post '/alexa' do
     content_type :json
 
