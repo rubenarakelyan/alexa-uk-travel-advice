@@ -7,6 +7,10 @@ class HTML2SSML
     @html = html
   end
 
+  def to_plain_text
+    strip_html(html)
+  end
+
   def to_ssml
     text = strip_html(html)
     text_to_speak = paragraphs_to_sentences(text)

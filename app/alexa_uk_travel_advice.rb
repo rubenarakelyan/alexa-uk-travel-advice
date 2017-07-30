@@ -16,13 +16,14 @@ class AlexaUKTravelAdviceHandler < AlexaSkillsRuby::Handler
     # Get the travel advice for the country from GOV.UK
     travel_advice = Faraday.get("#{GOV_UK_TRAVEL_ADVICE_ENDPOINT}#{country_slug}")
 
-    # Output some text for Alexa to read
+    # Output some text for Alexa to speak
     if travel_advice.status == 200
       summary = JSON.parse(travel_advice.body)['details']['summary']
-      text_to_speak = "Here's the latest travel advice for #{country_name}: #{summary}"
-      ssml_to_speak = HTML2SSML.new(text_to_speak).to_ssml
+      text_to_speak = HTML2SSML.new("Here's the latest travel advice for #{country_name}. #{summary}")
+      ssml_to_speak = text_to_speak.to_ssml
+      text_to_display = text_to_speak.to_plain_text
       response.set_output_speech_ssml(ssml_to_speak)
-      response.set_simple_card("Travel advice for #{country_name}", summary)
+      response.set_simple_card("Travel advice for #{country_name}", text_to_display)
     else
       response.set_output_speech_text("Sorry, I can't find any travel advice for #{country_name}.")
     end
