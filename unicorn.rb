@@ -1,4 +1,4 @@
-@dir = '/var/www/alexa-skills.arakelyan.uk/uk-travel-advice/'
+@dir = '/var/www/apps/alexa-uk-travel-advice/'
 
 worker_processes 2
 working_directory @dir
