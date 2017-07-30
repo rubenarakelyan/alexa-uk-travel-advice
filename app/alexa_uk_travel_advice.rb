@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'alexa_skills_ruby'
 require 'faraday'
 require 'json'
+require_relative '../lib/html_to_ssml'
 
 class AlexaUKTravelAdviceHandler < AlexaSkillsRuby::Handler
   GOV_UK_TRAVEL_ADVICE_ENDPOINT = 'https://www.gov.uk/api/content/foreign-travel-advice/'
@@ -18,8 +19,10 @@ class AlexaUKTravelAdviceHandler < AlexaSkillsRuby::Handler
     # Output some text for Alexa to read
     if travel_advice.status == 200
       summary = JSON.parse(travel_advice.body)['details']['summary']
-      response.set_output_speech_text("Here's the latest travel advice for #{country_name}: #{summary}")
-      #response.set_simple_card("title", "content")
+      text_to_speak = "Here's the latest travel advice for #{country_name}: #{summary}"
+      ssml_to_speak = HTML2SSML.new(text_to_speak).to_ssml
+      response.set_output_speech_ssml(ssml_to_speak)
+      response.set_simple_card("Travel advice for #{country_name}", summary)
     else
       response.set_output_speech_text("Sorry, I can't find any travel advice for #{country_name}.")
     end
