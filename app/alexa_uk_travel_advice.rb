@@ -5,13 +5,13 @@ require 'json'
 require_relative '../lib/html_to_ssml'
 
 class AlexaUKTravelAdviceHandler < AlexaSkillsRuby::Handler
-  GOV_UK_TRAVEL_ADVICE_ENDPOINT = 'https://www.gov.uk/api/content/foreign-travel-advice/'
+  GOV_UK_TRAVEL_ADVICE_ENDPOINT = 'https://www.gov.uk/api/content/foreign-travel-advice/'.freeze
 
   on_intent('AboutIntent') do
     # Get the country that was asked for
     slots = request.intent.slots
     country_name = slots['country']
-    country_slug = country_name.downcase.strip.gsub(' ', '-')
+    country_slug = country_name.downcase.strip.tr(' ', '-')
 
     # Get the travel advice for the country from GOV.UK
     travel_advice = Faraday.get("#{GOV_UK_TRAVEL_ADVICE_ENDPOINT}#{country_slug}")
