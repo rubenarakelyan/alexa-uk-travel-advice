@@ -1,16 +1,16 @@
-@dir = '/var/www/apps/alexa-uk-travel-advice/'
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
+timeout 15
+preload_app true
 
-worker_processes 2
-working_directory @dir
+before_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
+  end
+end
 
-timeout 30
-
-# Specify path to socket unicorn listens to
-listen "#{@dir}tmp/sockets/unicorn.sock", backlog: 64
-
-# Set process id path
-pid "#{@dir}tmp/pids/unicorn.pid"
-
-# Set log file paths
-stderr_path "#{@dir}log/unicorn.stderr.log"
-stdout_path "#{@dir}log/unicorn.stdout.log"
+after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
+end
