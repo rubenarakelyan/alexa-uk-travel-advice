@@ -8,7 +8,7 @@ end
 
 gem 'alexa_skills_ruby', '~> 1.1'
 gem 'faraday', '~> 0.12'
-gem 'nokogiri', '~> 1.8'
+gem 'nokogiri', '~> 1.10'
 gem 'rake', '~> 12.0'
 gem 'sinatra', '~> 2.0'
 
